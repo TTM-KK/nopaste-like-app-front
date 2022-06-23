@@ -24,7 +24,7 @@ export default function MonacoEditor({}) {
   /**ユーザー用にURLを生成 */
   function generatePageUrl(id) {
     const url =
-      process.env.NEXT_PUBLIC_BASE_URL + "/data_manage/display/" + id + "/";
+      process.env.NEXT_PUBLIC_BASE_URL + "/display/" + id + "/";
     return url;
   }
 
