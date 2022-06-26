@@ -1,5 +1,54 @@
-.text_title{
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 0.03em;
+.title_text {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+}
+
+.title_box {
+  padding: 10px;
+  background-color: #e7e7e7e7;
+}
+
+.nav_box {
+  margin: 10px 0 0 0;
+}
+
+.nav_item {
+  padding: 5px 10px;
+  display: inline-block;
+}
+
+.pulldown_box {
+  width: 200px;
+  padding: 5px 5px;
+}
+
+.link_btn {
+  padding: 3px 15px;
+}
+
+.link_arrow {
+  font-size: 18px;
+  padding: 0 0 0 15px;
+}
+
+.link_box {
+  width: 90vw;
+  padding: 5px;
+}
+
+@media (min-width: 768px) {
+  .link_box {
+    width: 50vw;
+  }
+}
+
+.explain_box {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #e7e7e7e7;
+}
+
+.editor {
+  margin: 15px 0 0 0;
 }

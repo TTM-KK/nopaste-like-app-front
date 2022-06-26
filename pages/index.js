@@ -13,7 +13,6 @@ export default function MonacoEditor({}) {
   const monacoRef = useRef(null);
   const [generateLink, setGenerateLink] = useState("");
   const [editorLang, setEditorLang] = useState("Plain Text");
-  // const [isLoading, setLoading] = useState(true);
   const [fetchData, setFetchData] = useState(null);
   /**対応言語 */
   const options = ["Plain Text", "javascript", "python", "css"];
@@ -86,25 +85,44 @@ export default function MonacoEditor({}) {
   } else if (fetchData || !router.query.id) {
     return (
       <div>
-        <div className={`${style.text_title}`}>NoPaste Like App</div>
+        <div className={`${style.title_text} ${style.title_box}`}>
+          NoPaste Like App
+        </div>
+        <div className={`${style.nav_box}`}>
+          <div className={style.nav_item}>
+            <select
+              onChange={(e) =>
+                updateEditorLang(options[e.target.selectedIndex])
+              }
+              defaultValue={options[0]}
+              className={`${style.pulldown_box}`}
+            >
+              {options.map((option, id) => (
+                <option key={id} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={`${style.nav_item}`}>
+            <button onClick={post} className={`${style.link_btn}`}>URLを取得</button>
+            <span className={style.link_arrow}>→</span>
+          </div>
+          <div className={`${style.nav_item}`}>
+            <input
+              defaultValue={generateLink}
+              onClick={selectLink}
+              id="select-link"
+              readOnly="readonly"
+              className={style.link_box}
+            ></input>
+          </div>
+          <div className={style.explain_box}>
+            ・テキストを入力後に「URLを取得」をクリックすることで、共有可能なURLを取得する事ができます。<br />
+            ・入力するプログラミング言語を指定することも可能です。
+          </div>
+        </div>
 
-        <button onClick={post}>共有用のリンクを取得</button>
-        <select
-          onChange={(e) => updateEditorLang(options[e.target.selectedIndex])}
-          defaultValue={options[0]}
-        >
-          {options.map((option, id) => (
-            <option key={id} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <input
-          defaultValue={generateLink}
-          onClick={selectLink}
-          id="select-link"
-          readOnly="readonly"
-        ></input>
         <Editor
           height="90vh"
           width="100vw"
@@ -120,6 +138,7 @@ export default function MonacoEditor({}) {
             },
           }}
           onMount={handleEditorDidMount}
+          className={style.editor}
         />
       </div>
     );
