@@ -69,7 +69,8 @@ export default function MonacoEditor({}) {
 
   /** uuidからデータを取得 */
   function getData(id) {
-    dataGet(id).then(res=>setFetchData(res))
+    console.log("get");
+    dataGet(id).then((res) => setFetchData(res));
   }
 
   /** query param idがある時のみAPIにfetch */
@@ -80,44 +81,47 @@ export default function MonacoEditor({}) {
       }
     }
   });
+  if (router.query.id && !fetchData) {
+    return <div>Loading</div>;
+  } else if (fetchData || !router.query.id) {
+    return (
+      <div>
+        <div className={`${style.text_title}`}>NoPaste Like App</div>
 
-  return (
-    <div>
-      <div className={`${style.text_title}`}>NoPaste Like App</div>
-
-      <button onClick={post}>共有用のリンクを取得</button>
-      <select
-        onChange={(e) => updateEditorLang(options[e.target.selectedIndex])}
-        defaultValue={options[0]}
-      >
-        {options.map((option, id) => (
-          <option key={id} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-      <input
-        defaultValue={generateLink}
-        onClick={selectLink}
-        id="select-link"
-        readOnly="readonly"
-      ></input>
-      <Editor
-        height="90vh"
-        width="100vw"
-        defaultLanguage={fetchData ? fetchData.lang : "Plain Text"}
-        defaultValue={fetchData ? fetchData.text : ""}
-        options={{
-          minimap: { enabled: false },
-          overviewRulerLanes: 0,
-          scrollbar: {
-            vertical: "hidden",
-            horizontal: "hidden",
-            handleMouseWheel: false,
-          },
-        }}
-        onMount={handleEditorDidMount}
-      />
-    </div>
-  );
+        <button onClick={post}>共有用のリンクを取得</button>
+        <select
+          onChange={(e) => updateEditorLang(options[e.target.selectedIndex])}
+          defaultValue={options[0]}
+        >
+          {options.map((option, id) => (
+            <option key={id} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <input
+          defaultValue={generateLink}
+          onClick={selectLink}
+          id="select-link"
+          readOnly="readonly"
+        ></input>
+        <Editor
+          height="90vh"
+          width="100vw"
+          defaultLanguage={fetchData ? fetchData.lang : "Plain Text"}
+          defaultValue={fetchData ? fetchData.text : ""}
+          options={{
+            minimap: { enabled: false },
+            overviewRulerLanes: 0,
+            scrollbar: {
+              vertical: "hidden",
+              horizontal: "hidden",
+              handleMouseWheel: false,
+            },
+          }}
+          onMount={handleEditorDidMount}
+        />
+      </div>
+    );
+  }
 }
